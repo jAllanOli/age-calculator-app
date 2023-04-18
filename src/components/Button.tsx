@@ -1,8 +1,12 @@
 import arrowIcon from "../assets/images/icon-arrow.svg";
 
-const Button = () => {
+interface ButtonProps {
+  handleClick: () => void;
+}
+
+const Button = ({ handleClick }: ButtonProps) => {
   return (
-    <button className="button">
+    <button className="button" onClick={handleClick}>
       <img src={arrowIcon} alt="Arrow" />
     </button>
   );
