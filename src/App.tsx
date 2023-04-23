@@ -59,9 +59,6 @@ const App = () => {
   function validateForm(event: React.MouseEvent<HTMLButtonElement>) {
     if (!isValid || !day || !month || !year) {
       event.preventDefault();
-      console.log("não submitou");
-    } else {
-      console.log("submitou");
     }
   }
 

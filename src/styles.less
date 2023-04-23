@@ -1,3 +1,5 @@
+@bigScreen: 500px;
+
 * {
   margin: 0;
   padding: 0;
@@ -14,17 +16,26 @@
   background-color: #f0f0f0;
 
   font-family: "Poppins", sans-serif;
+
+  @media (min-width: @bigScreen) {
+    padding-top: 0;
+    justify-content: center;
+  }
 }
 
 .main-container {
   background-color: #fff;
 
-  width: min(90%, 840px);
+  width: min(90%, 728px);
   padding: 3rem 1.1rem;
   display: flex;
   flex-direction: column;
 
   border-radius: 24px 24px 100px 24px;
+
+  @media (min-width: @bigScreen) {
+    padding: 3rem;
+  }
 }
 
 .inputs-container {
@@ -33,6 +44,12 @@
 
   padding-bottom: 4rem;
   border-bottom: solid 1px #dcdcdc;
+
+  @media (min-width: @bigScreen) {
+    padding-bottom: 2rem;
+
+    gap: 1.5rem;
+  }
 }
 
 .input {
@@ -45,6 +62,10 @@
     letter-spacing: 1px;
     font-size: 12px;
     color: #716f6f;
+
+    @media (min-width: @bigScreen) {
+      font-size: 14px;
+    }
   }
 
   &__area {
@@ -56,6 +77,13 @@
     font-size: 1.1rem;
     font-weight: 800;
     -webkit-font-smoothing: antialiased;
+
+    @media (min-width: @bigScreen) {
+      width: min(100%, 120px);
+      height: 60px;
+
+      font-size: 1.4rem;
+    }
 
     &--invalid {
       border-color: #ff5959;
@@ -73,6 +101,10 @@
     color: #ff5959;
 
     margin-top: 0.25rem;
+
+    @media (min-width: @bigScreen) {
+      font-size: 10px;
+    }
   }
 }
 
@@ -96,12 +128,21 @@
   &:hover {
     background-color: #000;
     cursor: pointer;
+    transform: scale(1.1);
     transition: all 750ms ease;
+  }
+
+  @media (min-width: @bigScreen) {
+    align-self: flex-end;
   }
 }
 
 .results-container {
   padding: 2rem 0;
+
+  @media (min-width: @bigScreen) {
+    padding: 0;
+  }
 }
 
 .result {
@@ -116,9 +157,19 @@
   &__value {
     color: #854dff;
     font-size: 56px;
+    @media (min-width: @bigScreen) {
+      font-size: 72px;
+    }
   }
 
   &__description {
     font-size: 56px;
+    @media (min-width: @bigScreen) {
+      font-size: 72px;
+      letter-spacing: 5px;
+    }
+  }
+  @media (min-width: @bigScreen) {
+    margin: 1rem 0;
   }
 }
