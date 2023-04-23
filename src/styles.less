@@ -5,6 +5,7 @@
 }
 
 #root {
+  padding-top: 5rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,11 +17,10 @@
 }
 
 .main-container {
-  position: relative;
   background-color: #fff;
 
   width: min(90%, 840px);
-  padding: 2rem;
+  padding: 3rem 1.1rem;
   display: flex;
   flex-direction: column;
 
@@ -56,6 +56,23 @@
     font-size: 1.1rem;
     font-weight: 800;
     -webkit-font-smoothing: antialiased;
+
+    &--invalid {
+      border-color: #ff5959;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1.5px solid #716f6f;
+    }
+  }
+
+  &__error-area {
+    font-size: 8px;
+    font-family: "Poppins", sans-serif;
+    color: #ff5959;
+
+    margin-top: 0.25rem;
   }
 }
 
@@ -66,9 +83,9 @@
   height: 64px;
   width: 64px;
 
-  position: absolute;
-  top: 133px;
-  left: calc(50% - 32px);
+  align-self: center;
+  position: relative;
+  margin-top: -32px;
 
   transition: all 750ms ease;
 
@@ -84,7 +101,7 @@
 }
 
 .results-container {
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .result {

@@ -20,70 +20,87 @@ const App = () => {
     days: 0,
   });
 
-  function calculateAge(startDate: Date, endDate: Date): ResultCounter {
-    let years = endDate.getFullYear() - startDate.getFullYear();
-    let months = endDate.getMonth() - startDate.getMonth();
-    let days = endDate.getDate() - startDate.getDate();
+  const [isValid, setIsValid] = React.useState<boolean>(false);
+
+  function setFormValidity(state: boolean) {
+    setIsValid(state);
+  }
+
+  function calculateAge(): ResultCounter {
+    const currentDate = new Date();
+    const birthDate = new Date(`${month}/${day}/${year}`);
+    let years = currentDate.getFullYear() - birthDate.getFullYear();
+    let months = currentDate.getMonth() - birthDate.getMonth();
+    let days = currentDate.getDate() - birthDate.getDate();
 
     // Check if current date day is earlier than birthdate day
     if (days < 0) {
       const lastMonthEndDate = new Date(
-        endDate.getFullYear(),
-        endDate.getMonth(),
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
         0
       );
       days =
-        lastMonthEndDate.getDate() - startDate.getDate() + endDate.getDate();
+        lastMonthEndDate.getDate() -
+        birthDate.getDate() +
+        currentDate.getDate();
       months--;
     }
 
     // Check if current date month is earlier than birthdate month
     if (months < 0) {
-      months = 12 - startDate.getMonth() + endDate.getMonth();
+      months = 12 - birthDate.getMonth() + currentDate.getMonth();
       years--;
     }
 
     return { years, months, days };
   }
 
-  const handleClick = () => {
-    const currentDate = new Date();
-    const birthDate = new Date(`${month}/${day}/${year}`);
+  function validateForm(event: React.MouseEvent<HTMLButtonElement>) {
+    if (!isValid || !day || !month || !year) {
+      event.preventDefault();
+      console.log("não submitou");
+    } else {
+      console.log("submitou");
+    }
+  }
 
-    setResult(calculateAge(birthDate, currentDate));
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    validateForm(event);
+    setResult(calculateAge());
   };
 
   return (
     <main className="main-container">
-      <div className="inputs-container">
+      <form noValidate className="inputs-container">
         <Input
           label="day"
           placeholder="DD"
           value={day}
-          maxValue={31}
           handleChange={(event: React.FormEvent<HTMLInputElement>) =>
             setDay(event.currentTarget.value)
           }
+          setFormValidity={setFormValidity}
         />
         <Input
-          maxValue={12}
           label="month"
           placeholder="MM"
           value={month}
           handleChange={(event: React.FormEvent<HTMLInputElement>) =>
             setMonth(event.currentTarget.value)
           }
+          setFormValidity={setFormValidity}
         />
         <Input
-          maxValue={2023}
           label="year"
           placeholder="YYYY"
           value={year}
           handleChange={(event: React.FormEvent<HTMLInputElement>) =>
             setYear(event.currentTarget.value)
           }
+          setFormValidity={setFormValidity}
         />
-      </div>
+      </form>
       <Button handleClick={handleClick} />
       <div className="results-container">
         <Result
